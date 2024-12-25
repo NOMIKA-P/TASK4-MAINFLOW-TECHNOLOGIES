@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .calculator {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #display {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 1.2em;
+            border: 1px solid #ccc;
+            text-align: right;
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+            grid-gap: 5px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 1.1em;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: #eee;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        .operator {
+          background-color: #f0ad4e; /* Orange color for operators */
+          color: white;
+        }
+        .operator:hover {
+          background-color: #eea236;
+        }
+        .equal {
+          background-color: #5cb85c; /* Green color for equals */
+          color: white;
+        }
+        .equal:hover {
+          background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <div class="buttons">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="backspace()">&#8592;</button>
+            <button class="operator" onclick="appendToDisplay('/')">/</button>
+            <button class="operator" onclick="appendToDisplay('')"></button>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button class="operator" onclick="appendToDisplay('-')">-</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button class="operator" onclick="appendToDisplay('+')">+</button>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button class="equal" onclick="calculate()">=</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button style="visibility:hidden;"></button>
+            <button style="visibility:hidden;"></button>
+        </div>
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+        function backspace(){
+          let displayValue = document.getElementById('display').value;
+          document.getElementById('display').value = displayValue.slice(0, -1);
+        }
+
+        function calculate() {
+            try {
+                document.getElementById('display').value = eval(document.getElementById('display').value);
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+    </script>
+
+</body>
+</html>
